@@ -1,9 +1,9 @@
 # EDII Expressões de Árvores
 
 ## Alunos:
- - João Vitor Garcia Aguiar Mintz; RA: 10440421
- - Yan Andreotti; RA:
- - Giovanni; RA:
+ - João Vitor Garcia Aguiar Mintz - RA:10440421
+ - Yan Andreotti dos Santos - RA:10439766
+ - Giovanni Castro - RA:10435745
 
 ## 1. Introdução:
 
