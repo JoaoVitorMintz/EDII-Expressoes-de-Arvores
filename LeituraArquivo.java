@@ -7,12 +7,13 @@ public class LeituraArquivo {
         String caminho = "arquivo.txt";
         Arvore ar = new Arvore();
 
-        System.out.print("Lendo 'arquivo.txt' e inserindo seus valores na árvore:\n");
+        System.out.print("Lendo 'arquivo.txt' e inserindo seus valores na árvore...\n\n");
         
         // Leitura do arquivo e leitura de cada linha (também verifica se deu erro ou não).
         try (BufferedReader br = new BufferedReader(new FileReader(caminho))) {
             String linha;
 
+            System.out.print("Expressão presente no arquivo: ");
             while ((linha = br.readLine()) != null) {
                 System.out.println(linha);
                 construirArvore(linha, ar);
@@ -20,6 +21,7 @@ public class LeituraArquivo {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        ar.exibirArvore();
 
     }
 
@@ -32,8 +34,8 @@ public class LeituraArquivo {
 
             if (Character.isDigit(atual)) {
                 int numero = 0;
-                while (i < expressao.length() && Character.isDigit(atual)) {
-                    numero = numero * 10 + Character.getNumericValue(atual);
+                while (i < expressao.length() && Character.isDigit(expressao.charAt(i))) {
+                    numero = numero * 10 + (expressao.charAt(i) - '0');
                     i++;
                 }
                 ar.inserir(numero);

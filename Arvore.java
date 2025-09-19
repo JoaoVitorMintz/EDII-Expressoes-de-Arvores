@@ -48,12 +48,11 @@ public class Arvore {
     }
 
     private void exibirArvore(Node no, int nivel) {
-        if (no != null) {
+        if(no != null) {
             exibirArvore(no.direita, nivel + 1);
-            for (int i = 1; i <= nivel; i++) {
-                System.out.print(" - ");
-            }
-            System.out.print(no.valor);
+            for(int r = 1; r <= nivel; r++)
+              System.out.print(" - ");
+            System.out.println(no.valor);
             exibirArvore(no.esquerda, nivel + 1);
         }
     }
