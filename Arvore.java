@@ -58,18 +58,41 @@ public class Arvore {
     }
 
     public boolean EhBST() {
-        // TODO: Realizar o código para verificar se é uma árvore de busca, retorna TRUE se for sim de busca
-        return true; // retornando algo só pra não dar mensagem de erro...
+        return EhBST(this.raiz, Integer.MIN_VALUE, Integer.MAX_VALUE);
+    }
+
+    private boolean EhBST(Node no, int min, int max) {
+        if (no == null) return true;
+        if (no.valor <= min || no.valor >= max) return false;
+        return EhBST(no.esquerda, min, no.valor) &&
+               EhBST(no.direita, no.valor, max);
     }
 
     public boolean EhAVL() {
-        // TODO: Realizar código para verificar se a árvore é balanceada, retorna TRUE se for sim balanceada
-        return true; // retornando algo só pra não dar mensagem de erro...
+        return verificarAVL(this.raiz) != -1;
+    }
+
+    private int verificarAVL(Node no) {
+        if (no == null) return 0;
+
+        int altEsq = verificarAVL(no.esquerda);
+        if (altEsq == -1) return -1;
+
+        int altDir = verificarAVL(no.direita);
+        if (altDir == -1) return -1;
+
+        if (Math.abs(altEsq - altDir) > 1) return -1;
+
+        return 1 + Math.max(altEsq, altDir);
     }
 
     public int alturaArvore() {
-        // TODO: REalizar código para verificar a altura da árvore, devolvendo sua altura
-        return 1; // retornando algo só pra não dar mensagem de erro...
+        return altura(this.raiz);
+    }
+
+    private int altura(Node no) {
+        if (no == null) return 0;
+        return 1 + Math.max(altura(no.esquerda), altura(no.direita));
     }
 
     public void preOrdem() {
