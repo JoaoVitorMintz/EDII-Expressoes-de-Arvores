@@ -97,10 +97,58 @@ public class Arvore {
 
     public void preOrdem() {
         preOrdem(this.raiz);
+        System.out.println();
     }
 
     private void preOrdem(Node no) {
         // TODO REalizar código para exibir a sequência de folhas em PRE ORDEM
+        if (no != null) {
+            System.out.print(no.valor + " ");
+            preOrdem(no.esquerda);
+            preOrdem(no.direita);
+        }
     }
 
+    // Método para acessar a raiz externamente
+    public Node getRaiz() {
+        return raiz;
+    }
+
+    // Método auxiliar: construir árvore a partir da expressão do arquivo
+    public static Node construirExpressao(String[] tokens, int[] pos) {
+        if (pos[0] >= tokens.length) return null;
+
+        String token = tokens[pos[0]++];
+
+        // Se for nulo
+        if (token.equals("*")) return null;
+
+        // Se não for "(", é mal-formada
+        if (!token.equals("(")) throw new RuntimeException("Expressão mal-formada!");
+
+        // Próximo deve ser o valor
+        if (pos[0] >= tokens.length) throw new RuntimeException("Expressão mal-formada!");
+        int valor = Integer.parseInt(tokens[pos[0]++]);
+
+        Node no = new Node();
+        no.valor = valor;
+
+        // Constrói filho esquerdo
+        no.esquerda = construirExpressao(tokens, pos);
+
+        // Constrói filho direito
+        no.direita = construirExpressao(tokens, pos);
+
+        // Espera um ")"
+        if (pos[0] >= tokens.length || !tokens[pos[0]].equals(")")) {
+            throw new RuntimeException("Expressão mal-formada!");
+        }
+        pos[0]++; // consome ")"
+
+        return no;
+    }
+
+    public void setRaiz(Node raiz) {
+        this.raiz = raiz;
+    }
 }
